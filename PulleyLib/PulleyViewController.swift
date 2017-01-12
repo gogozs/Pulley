@@ -446,11 +446,11 @@ open class PulleyViewController: UIViewController, UIScrollViewDelegate, PulleyP
         var collapsedHeight:CGFloat = kPulleyDefaultCollapsedHeight
         var partialRevealHeight:CGFloat = kPulleyDefaultPartialRevealHeight
         
-        if let drawerVCCompliant = drawerContentViewController as? PulleyDrawerViewControllerDelegate
-        {
-            collapsedHeight = drawerVCCompliant.collapsedDrawerHeight()
-            partialRevealHeight = drawerVCCompliant.partialRevealDrawerHeight()
-        }
+//        if let drawerVCCompliant = drawerContentViewController as? PulleyDrawerViewControllerDelegate
+//        {
+//            collapsedHeight = drawerVCCompliant.collapsedDrawerHeight()
+//            partialRevealHeight = drawerVCCompliant.partialRevealDrawerHeight()
+//        }
         
         let lowestStop = [(self.view.bounds.size.height - topInset), collapsedHeight, partialRevealHeight].min() ?? 0
         let bounceOverflowMargin: CGFloat = 20.0
@@ -473,15 +473,15 @@ open class PulleyViewController: UIViewController, UIScrollViewDelegate, PulleyP
         drawerScrollView.contentSize = CGSize(width: drawerScrollView.bounds.width, height: (drawerScrollView.bounds.height - lowestStop) + drawerScrollView.bounds.height)
         
         // Update rounding mask and shadows
-        let borderPath = UIBezierPath(roundedRect: drawerContentContainer.bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: drawerCornerRadius, height: drawerCornerRadius)).cgPath
+//        let borderPath = UIBezierPath(roundedRect: drawerContentContainer.bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: drawerCornerRadius, height: drawerCornerRadius)).cgPath
         
-        let cardMaskLayer = CAShapeLayer()
-        cardMaskLayer.path = borderPath
-        cardMaskLayer.frame = drawerContentContainer.bounds
-        cardMaskLayer.fillColor = UIColor.white.cgColor
-        cardMaskLayer.backgroundColor = UIColor.clear.cgColor
-        drawerContentContainer.layer.mask = cardMaskLayer
-        drawerShadowView.layer.shadowPath = borderPath
+//        let cardMaskLayer = CAShapeLayer()
+//        cardMaskLayer.path = borderPath
+//        cardMaskLayer.frame = drawerContentContainer.bounds
+//        cardMaskLayer.fillColor = UIColor.white.cgColor
+//        cardMaskLayer.backgroundColor = UIColor.clear.cgColor
+//        drawerContentContainer.layer.mask = cardMaskLayer
+//        drawerShadowView.layer.shadowPath = borderPath
         
         // Make VC views match frames
         primaryContentViewController?.view.frame = primaryContentContainer.bounds
@@ -747,6 +747,7 @@ open class PulleyViewController: UIViewController, UIScrollViewDelegate, PulleyP
 
             let lowestStop = drawerStops.min() ?? 0
             
+            print("\(#function) scrollView frame:\(scrollView.frame) contentOffset: \(scrollView.contentOffset) contentInset:\(scrollView.contentInset) partialRevealHeight:\(partialRevealHeight) lowestStop:\(lowestStop) ")
             if scrollView.contentOffset.y > partialRevealHeight - lowestStop
             {
                 // Calculate percentage between partial and full reveal

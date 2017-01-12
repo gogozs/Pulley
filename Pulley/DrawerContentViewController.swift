@@ -79,6 +79,7 @@ class DrawerContentViewController: UIViewController, UITableViewDelegate, UITabl
     {
         tableView.isScrollEnabled = drawer.drawerPosition == .open
         
+        print("\(#function) tableView.isScrollEnable: \(tableView.isScrollEnabled)")
         if drawer.drawerPosition != .open
         {
             searchBar.resignFirstResponder()
